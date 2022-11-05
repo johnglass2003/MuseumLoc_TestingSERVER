@@ -7,6 +7,7 @@ Created on Thu Jun 20 21:54:35 2019
 """
 import math
 import time
+from random import random 
 import numpy as np
 from operator import itemgetter
 from sklearn.preprocessing import normalize
@@ -226,15 +227,20 @@ HOST = "127.0.0.1"  # The server's hostname or IP address
 PORT = 65432  # The port used by the server
 
 hp_fun=help_fun()
-x_out= np.array([0,0,0,0,0,0])
+x_out= np.array([100,100,0,100,100,0])
+
+audioFiles = ["file1.wav", "file2.wav", "file3.wav", "file4.wav", "file5.wav"]
+exhibits = ["Exhibit1", "Exhibit2", "Exhibit3", "Exhibit4", "Exhibit5"]
+initMsg = str(audioFiles) + "^" + str(exhibits)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
+    s.send(initMsg.encode('utf-8'))
     while True:
         time.sleep(0.2)
         try:
-            x_out[0] += 1
-            x_out[1] += 1
+            x_out[0] += 5 - random() * 7
+            x_out[1] += 5 - random() * 7
             hedge_iner_posi=hp_fun.y_hedge_axis(x_out[0:3],x_out[3:6])[1]
             s.send(str(hedge_iner_posi).encode('utf-8'))
             print(f"Send {str(hedge_iner_posi)!r}")
