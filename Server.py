@@ -231,10 +231,11 @@ x_out= np.array([100,100,0,100,100,0])
 
 audioFiles = ["file1.wav", "file2.wav", "file3.wav", "file4.wav", "file5.wav"]                                             #array of audio files
 exhibits = ["Exhibit1", "Exhibit2", "Exhibit3", "Exhibit4", "Exhibit5"]                                                    #array of exhibits
-locations = ["[50, 50, 0]","[50, 50, 0]","[50, 50, 0]","[50, 50, 0]","[50, 50, 0]"]  #array of exhibit locations
-print(str(locations))
+locations = []  #array of exhibit locations
+
+
 #message to send including all three arrays of data using ^ as a delimiter
-initMsg = str(audioFiles) + "^" + str(exhibits) + "^" + str(locations)
+initMsg = str(audioFiles) + "^" + str(exhibits)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
