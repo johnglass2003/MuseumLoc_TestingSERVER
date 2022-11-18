@@ -227,7 +227,7 @@ HOST = "127.0.0.1"  # The server's hostname or IP address
 PORT = 65432  # The port used by the server
 
 hp_fun=help_fun()
-x_out= np.array([100,100,0,100,100,0])
+x_out= np.array([100.0,100.0,0.0,100.0,100.0,0.0])
 
 audioFiles = ["file1.wav", "file2.wav", "file3.wav", "file4.wav", "file5.wav"]                                             #array of audio files
 exhibits = ["Exhibit1", "Exhibit2", "Exhibit3", "Exhibit4", "Exhibit5"]                                                    #array of exhibits
@@ -251,6 +251,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:
             x_out[0] += 5 - random() * 7
             x_out[1] += 5 - random() * 7
+            for n in x_out:
+                n = round(n,4)
+                print(n)
             hedge_iner_posi=hp_fun.y_hedge_axis(x_out[0:3],x_out[3:6])[1]
             s.send(str(hedge_iner_posi).encode('utf-8'))
             print(f"Send {str(hedge_iner_posi)!r}")
