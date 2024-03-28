@@ -226,6 +226,8 @@ import socket
 HOST = "127.0.0.1"  # The server's hostname or IP address
 PORT = 65432  # The port used by the server
 
+HOST = "192.168.56.1"
+
 hp_fun=help_fun()
 x_out= np.array([100.0,100.0,0.0,100.0,100.0,0.0])
 
